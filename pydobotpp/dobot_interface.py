@@ -3,7 +3,7 @@ import math
 from typing import NamedTuple
 
 
-class MODE_PTP(IntEnum):
+class PTPMode(IntEnum):
     JUMP_XYZ = 0x00
     MOVJ_XYZ = 0x01
     MOVL_XYZ = 0x02

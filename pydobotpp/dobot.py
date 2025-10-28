@@ -1,6 +1,6 @@
 import math
 import struct
-from pydobotpp.dobot_interface import MODE_PTP, Alarm, Joints, Pose, Position
+from pydobotpp.dobot_interface import PTPMode, Alarm, Joints, Pose, Position
 from pydobotpp.message import Message
 import struct
 import math
@@ -724,7 +724,7 @@ class Dobot:
             r = current_pose.r
 
         if mode is None:
-            mode = MODE_PTP.MOVJ_XYZ  # Use default mode if not provided
+            mode = PTPMode.MOVJ_XYZ  # Use default mode if not provided
 
         return self._extract_cmd_index(self._set_ptp_cmd(x, y, z, r, mode, wait=wait))
 
