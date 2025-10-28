@@ -72,8 +72,19 @@ class Dobot:
             self.clear_alarms()
 
     def close(self, force_stop=True) -> None:
+        self.logger.debug("pydobot: Closing connection to %s" % self._ser.name)
+        # Stop and clear queued commands
         self._set_queued_cmd_stop_exec(force=force_stop)
         self._set_queued_cmd_clear()
+        # Reset end effectors
+        self._set_queued_cmd_start_exec()
+        self.laze()
+        self.grip(False)
+        self.wait_for_cmd(self.suck(False))
+        # Stop and clear queued commands again to ensure everything is stopped
+        self._set_queued_cmd_stop_exec()
+        self._set_queued_cmd_clear()
+
         with self._lock:
             self._ser.close()
         self.logger.debug("pydobot: %s closed" % self._ser.name)
