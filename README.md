@@ -85,7 +85,7 @@ device.close()
 * **.get_device_serial_number()** Returns the robot's serial number
 
 *  **.set_device_name(name: str)** Sets the device's name (as one can do using DobotStudio)
-*  
+  
 *  **.get_device_name(name: str)** Get the device's name (as reported in DobotStudio)
 
 * **CustomPosition(x=None, y=None, z=None, r=None)** Initializes a custom position object.
