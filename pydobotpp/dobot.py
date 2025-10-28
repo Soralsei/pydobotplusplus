@@ -1,7 +1,7 @@
 import math
 import struct
-from pydobotplusplus.dobot_interface import MODE_PTP, Alarm, Joints, Pose, Position
-from pydobotplusplus.message import Message
+from pydobotpp.dobot_interface import MODE_PTP, Alarm, Joints, Pose, Position
+from pydobotpp.message import Message
 import struct
 import math
 import logging
