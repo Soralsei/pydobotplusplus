@@ -751,10 +751,13 @@ class Dobot:
 
         return self._send_command(msg)
 
-    def wait(self, ms: int):
+    def _set_wait_cmd(self, ms: int):
         msg = Message()
         msg.id = 110
         msg.ctrl = 0x03  # RW and Queued
         msg.params = bytearray([])
         msg.params.extend(bytearray(struct.pack("I", ms)))
         return self._send_command(msg)
+
+    def wait(self, ms: int):
+        return self._extract_cmd_index(self._set_wait_cmd(ms))
