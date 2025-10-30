@@ -25,7 +25,7 @@ class DobotException(Exception):
 
 class Dobot:
 
-    def __init__(self, port: Optional[str] = None) -> None:
+    def __init__(self, port: Optional[str] = None, should_clear_alarms: bool = True) -> None:
 
         self.logger = logging.Logger(__name__)
         self._lock = RLock()
@@ -65,11 +65,12 @@ class Dobot:
         self._set_ptp_jump_params(10, 200)
         self._set_ptp_common_params(velocity=100, acceleration=100)
 
-        alarms = self.get_alarms()
+        if should_clear_alarms:
+            alarms = self.get_alarms()
 
-        if alarms:
-            self.logger.warning(f"Clearing alarms: {', '.join(map(str, alarms))}.")
-            self.clear_alarms()
+            if alarms:
+                self.logger.warning(f"Clearing alarms: {', '.join(map(str, alarms))}.")
+                self.clear_alarms()
 
     def close(self, force_stop=True) -> None:
         self.logger.debug("pydobot: Closing connection to %s" % self._ser.name)

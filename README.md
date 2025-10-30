@@ -45,6 +45,11 @@ device.close()
     * **port**: _string_ with name of serial port to connect
     * **verbose**: _bool_ will print to console all serial communications
 
+* **.wait_for_cmd(cmd_id)** Waits for the dobot's command queue to finish the *cmd_id* command.
+    *  **cmd_id**: The return id of action commands (**.home()**, **.suck(enable)**, **.grip(enable)**, etc...)
+
+* **.home()** Sends a homing command to the robot, to reset the angle position of the robot's base motor.
+
 * **.get_pose()** Returns the current pose of the Dobot, as a `Pose` named tuple (position and joints).
     * **position**: _Position_ with (x, y, z, r) coordinates
     * **joints**: _Joints_ with (j1, j2, j3, j4) angles
@@ -81,6 +86,7 @@ device.close()
 * **.clear_alarms()** Clears all current alarms.
 
 * **.wait(ms)** Sends a wait command to the robot
+  * **ms**: The time to wait in milliseconds.
 
 * **.get_device_serial_number()** Returns the robot's serial number
 
