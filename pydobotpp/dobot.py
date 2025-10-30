@@ -1,6 +1,6 @@
 import math
 import struct
-from pydobotpp.dobot_interface import PTPMode, Alarm, Joints, Pose, Position
+from pydobotpp.dobot_interface import GPIOPort, PTPMode, Alarm, Joints, Pose, Position
 from pydobotpp.message import Message
 import struct
 import math
@@ -640,11 +640,6 @@ class Dobot:
 
         self.wait_for_cmd(self.laze(0, False))
 
-    PORT_GP1 = 0x00
-    PORT_GP2 = 0x01
-    PORT_GP4 = 0x02
-    PORT_GP5 = 0x03
-
     def conveyor_belt_distance(
         self, speed_mm_per_sec, distance_mm, direction=1, interface=0
     ):
@@ -666,7 +661,7 @@ class Dobot:
             )
         )
 
-    def set_color(self, enable=True, port=PORT_GP2, version=0x1):
+    def set_color(self, enable=True, port=GPIOPort.GP2, version=0x1):
         msg = Message()
         msg.id = 137
         msg.ctrl = 0x03
@@ -676,7 +671,7 @@ class Dobot:
         msg.params.extend(bytearray([version]))  # Version1=0, Version2=1
         return self._extract_cmd_index(self._send_command(msg))
 
-    def get_color(self, port=PORT_GP2, version=0x1):
+    def get_color(self, port=GPIOPort.GP2, version=0x1):
         msg = Message()
         msg.id = 137
         msg.ctrl = 0x00
@@ -691,7 +686,7 @@ class Dobot:
         b = struct.unpack_from("?", response.params, 2)[0]
         return [r, g, b]
 
-    def set_ir(self, enable=True, port=PORT_GP4):
+    def set_ir(self, enable=True, port=GPIOPort.GP4):
         msg = Message()
         msg.id = 138
         msg.ctrl = 0x02
@@ -700,7 +695,7 @@ class Dobot:
         msg.params.extend(bytearray([port]))
         return self._extract_cmd_index(self._send_command(msg))
 
-    def get_ir(self, port=PORT_GP4):
+    def get_ir(self, port=GPIOPort.GP4):
         msg = Message()
         msg.id = 138
         msg.ctrl = 0x00

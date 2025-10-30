@@ -3,6 +3,13 @@ import math
 from typing import NamedTuple
 
 
+class GPIOPort(IntEnum):
+    GP1 = 0x00
+    GP2 = 0x01
+    GP4 = 0x02
+    GP5 = 0x03
+
+
 class PTPMode(IntEnum):
     JUMP_XYZ = 0x00
     MOVJ_XYZ = 0x01
