@@ -8,14 +8,14 @@ Install the driver from [Silicon Labs](https://www.silabs.com/products/developme
 
 Run:
 ```sh
-pip install pydobotplus
+pip install pydobotpp
 ```
 
 ## Example
 
 ```python
 from serial.tools import list_ports
-from pydobotplus import Dobot, CustomPosition
+from pydobotpp import Dobot, CustomPosition
 
 available_ports = list_ports.comports()
 print(f'available ports: {[x.device for x in available_ports]}')
@@ -105,11 +105,11 @@ device.close()
 * **.get_color()** Returns the RGB values detected by the color sensor.
     * **returns**: _list_ with RGB values
 
-* **.set_ir(enable=True, port=PORT_GP4)** Enables or disables the IR sensor on the specified port.
+* **.set_ir(enable=True, port=GPIOPort.GP4)** Enables or disables the IR sensor on the specified port.
     * **enable**: _bool_ enables/disables the sensor
     * **port**: _int_ port number
 
-* **.get_ir(port=PORT_GP4)** Returns the state of the IR sensor on the specified port.
+* **.get_ir(port=GPIOPort.GP4)** Returns the state of the IR sensor on the specified port.
     * **port**: _int_ port number
     * **returns**: _bool_ state of the sensor
 
